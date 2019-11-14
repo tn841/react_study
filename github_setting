@@ -1,0 +1,18 @@
+맨날 까먹는 git 최초 설정
+
+참고 : https://duzi077.tistory.com/127
+
+- git confing 설정
+    git config --global user.email "tn841@naver.com"
+
+- git 관리할 폴더 init
+    git init
+
+- git add *
+
+- git commit -m '커밋 메시지'
+
+- 원격 저장소 등록
+    git remote add origin github주소
+
+- git push origin master
