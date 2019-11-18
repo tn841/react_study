@@ -27,11 +27,12 @@
 //  : 파라미터가 바뀌면 반환값이 바뀌고, 같은 파라미터에 대해서 항상 같은 값을 반환
 // radom()이나 비동기 처리같은 것은 별도로 처리해줘야한다.
 import { VisibilityFilters, SET_VISIBILITY_FILTER, ADD_TODO, TOGGLE_TODO } from './actions';
+import { combineReducers } from 'redux';
 
 const { SHOW_ALL } = VisibilityFilters;
 
 const initState = {
-    VisibilityFilters: VisibilityFilters.SHOW_ALL,
+    VisibilityFilter: VisibilityFilters.SHOW_ALL,
     todos: []
 }
 
@@ -39,7 +40,7 @@ function todos(state = [], action) {
     switch (action.type) {
         case ADD_TODO:
             return [
-                ...state.todos,
+                ...state,
                 {
                     text: action.text,
                     completed: false
@@ -68,24 +69,15 @@ function visibilityFilter(state = SHOW_ALL, action){
     }
 }
 
-function todoApp(prevState = initState, action) {
-    // ES6의 default arguments 문법으로 아래 if문을 대체 가능
-    // if( typeof prevState === 'undefined' ){
-    //     return initState;
-    // }
-
-    // action에 대한 handling처리
-    switch(action.type){
-        case SET_VISIBILITY_FILTER:
-            return visibilityFilter(prevState.visibilityFilter, action);    // This is called reducer composition
-        case ADD_TODO: 
-            return todos(prevState.todos, action);  // This is called reducer composition
-        case TOGGLE_TODO:
-            return todos(prevState.todos, action);  // This is called reducer composition
-        default:
-            return prevState;
-    }
-    
-}
+// function todoApp(state = {}, action){
+//     return {
+//         visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+//         todos: todos(state.todos, action)
+//     }
+// }
+const todoApp = combineReducers({
+    visibilityFilter,
+    todos
+});
 
 export default todoApp;
