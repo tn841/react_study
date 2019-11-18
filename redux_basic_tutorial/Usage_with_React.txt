@@ -46,3 +46,30 @@ https://redux.js.org/basics/usage-with-react
 
     4-1. Implementing Presentational Components
         - components/Todo.js
+        - components/TodoList.js
+        - components/Linke.js
+        - components/Footer.js
+
+    4-2. Implementing Container Components
+        : 이제 presentational component와 redux를 hook up 하는 처리를 한다.
+        : Container Component는 단순히 React Component이며,
+          store.subscribe()를 사용하여, presentational component의 props로
+          데이터를 전달하는 역할을 한다.
+        : 손으로 직접 구현 할 수 도 있지만, React Redux lib에서 제공하는
+          connect() 함수 사용을 권장한다.
+        - connect() 함수 사용을 위해서, mapStateToProps 함수를 써야한다.
+          : 현재 Redux store의 state를 어떻게 원하는 presentational component에
+            wrapping하여 전달할지 설명하는 함수.
+        - 예를 들어, VisibleTodoList는 TodoList에 전달할 state.todos를 계산해야한다.
+          따라서 state.visibilityFilter에 따라 state.todos를 필터링하는 함수를 정의해야한다.
+
+        - mapStateToProps와 비슷한 개념으로, mapDispatchToProps() 함수도  정의해야한다.
+          : dispatch() 를 받아, 원하는 presentational component에 inject 하는 역할
+        - 예를 들어, VisibleTodoList.js에는 onTodoClick 함수가 inject되어야한다.
+          그렇게 함으로써, onTodoClick가 TOGGLE_TODO action을 dispatch하고 있게된다.
+
+    4-3. Implementing Other Components
+        : containers/AddTodo.js
+        : AddTodo component는 presentation과 logic을 둘다 갖고 있다.
+        
+
