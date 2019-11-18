@@ -30,4 +30,19 @@ https://redux.js.org/basics/usage-with-react
     - state 객체를 설계했던 것(reducer.js)을 생각하고 그것에 맞추어 UI를 설계하라.
 
     3-1. Designing Presentational Components
-    : 
+    - TodoList : todo 리스트를 보여주는 컴포넌트
+               : todos Array 
+    - Todo
+    - Link
+    - Footer
+    - App
+
+    3-2. Designing Conainer Components
+
+    3-3. Designing Other Components
+
+4. Implementing Components
+    : presentational component 부터 구현한다. redux 바인딩을 고려하지 않는다.
+
+    4-1. Implementing Presentational Components
+        - components/Todo.js
