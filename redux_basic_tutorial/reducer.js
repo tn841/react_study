@@ -28,9 +28,44 @@
 // radom()이나 비동기 처리같은 것은 별도로 처리해줘야한다.
 import { VisibilityFilters, SET_VISIBILITY_FILTER, ADD_TODO, TOGGLE_TODO } from './actions';
 
+const { SHOW_ALL } = VisibilityFilters;
+
 const initState = {
     VisibilityFilters: VisibilityFilters.SHOW_ALL,
     todos: []
+}
+
+function todos(state = [], action) {
+    switch (action.type) {
+        case ADD_TODO:
+            return [
+                ...state.todos,
+                {
+                    text: action.text,
+                    completed: false
+                }
+            ]
+        case TOGGLE_TODO:
+            return state.map((todo, index) => {
+                if(index === action.index){
+                    return Object.assign({}, todo, {
+                        completed: !todo.completed
+                    });
+                }
+                return todo;
+            });
+        default :
+            return state;
+    }
+}
+
+function visibilityFilter(state = SHOW_ALL, action){
+    switch (action.type){
+        case SET_VISIBILITY_FILTER:
+            return action.filter;
+        default:
+            return state;        
+    }
 }
 
 function todoApp(prevState = initState, action) {
@@ -42,30 +77,11 @@ function todoApp(prevState = initState, action) {
     // action에 대한 handling처리
     switch(action.type){
         case SET_VISIBILITY_FILTER:
-            return Object.assign({}, prevState, {
-                VisibilityFilter: action.filter
-            });
-        case ADD_TODO:
-            return Object.assign({}, prevState, {
-                todos: [
-                    ...prevState.todos,
-                    {
-                        text: action.text,
-                        completed: false
-                    }
-                ]
-            });
+            return visibilityFilter(prevState.visibilityFilter, action);    // This is called reducer composition
+        case ADD_TODO: 
+            return todos(prevState.todos, action);  // This is called reducer composition
         case TOGGLE_TODO:
-            return Object.assign({}, prevState, {
-                todos: prevState.todos.map((todo, index) => {
-                    if(index == action.index){
-                        return Object.assign({}, todo, {
-                            completed: !todo.completed
-                        })
-                    }
-                    return todo;
-                })
-            });
+            return todos(prevState.todos, action);  // This is called reducer composition
         default:
             return prevState;
     }
