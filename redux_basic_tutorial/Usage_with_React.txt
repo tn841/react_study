@@ -1,0 +1,33 @@
+Usage with React
+https://redux.js.org/basics/usage-with-react
+
+1. Installing React Redux
+    : npm install --save react-Redux
+
+2. Presentational Component and Container Components
+    : react에서 redux를 사용할 때는 presentational component와 
+    container componont를 분리한다.
+
+    * Presentational component
+    - 목적 : 어떻게 보여줄 것인가
+    - redux 사용 : 안함
+    - 데이터 읽는 방식 : props로 부터 읽는다.
+    - 데이터 변화 : props에 포함된 callback 함수 호출
+    - 작성 : 직접 작성
+
+
+    * Container Component
+    - 목적 :  어떻게 동작할 것인가
+    - redux 사용 : 사용함
+    - 데이터 읽는 방식 : redux의 state를 subscribe함
+    - 데이터 변화 : redux action을 dispatch함
+    - 작성 : React-Redux에 의해 생성됨
+
+    대부분은 Presentational Component를 만드는 과정이고,
+    Redux Store와 Container Component를 연결시키는 약간의 과정이 필요하다.
+
+3. Designing Component Hierarchy 컴포넌트 계층 설계
+    - state 객체를 설계했던 것(reducer.js)을 생각하고 그것에 맞추어 UI를 설계하라.
+
+    3-1. Designing Presentational Components
+    : 
